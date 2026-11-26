@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[STUDIO NAME] · The 12 Apps of Christmas</title>
+<meta name="description" content="One new app every day for twelve days, built in public with a team of AI agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #101318;
+    --surface: #181C23;
+    --surface-2: #232832;
+    --line: #262B34;
+    --line-strong: #3A404B;
+    --text: #ECE8E1;
+    --text-2: #B5B0A8;
+    --text-3: #9A958D;
+    --accent: #F2B544;
+    --accent-hover: #FFD27A;
+    --ok-bg: #1E3A2B;
+    --ok-text: #9BE0B5;
+    --radius: 10px;
+    --display: 'Space Grotesk', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, sans-serif; line-height: 1.5; }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-hover); }
+  h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Header */
+  .site-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+  .logo { font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--text); text-decoration: none; }
+  .site-header nav { display: flex; flex-wrap: wrap; gap: 28px; font-size: 15px; }
+  .site-header nav a { color: var(--text); text-decoration: none; }
+  .site-header nav a:hover { color: var(--accent); }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: var(--radius); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; border: 0; }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent-hover); color: var(--bg); }
+  .btn-ghost { border: 1px solid var(--line-strong); color: var(--text); font-weight: 500; background: transparent; }
+  .btn-ghost:hover { border-color: var(--text-3); color: var(--text); }
+
+  /* Hero */
+  .hero { padding: 88px 0 72px; max-width: 760px; display: flex; flex-direction: column; gap: 24px; }
+  .eyebrow { font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .hero h1 { font-size: clamp(40px, 6vw, 60px); line-height: 1.04; letter-spacing: -0.02em; }
+  .lede { font-size: 19px; line-height: 1.55; color: var(--text-2); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+
+  /* Sections */
+  section { padding: 24px 0 72px; }
+  .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 28px; }
+  .section-head h2 { font-size: 32px; }
+  .muted { color: var(--text-3); font-size: 15px; }
+
+  /* App tiles */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+  .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+  .tile-media { aspect-ratio: 16 / 10; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: #8C877F; font-size: 14px; }
+  .tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .tile-body { padding: 22px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; }
+  .tile-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .tile-day { font-size: 13px; font-weight: 600; color: var(--accent); }
+  .badge { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--ok-bg); color: var(--ok-text); }
+  .tile h3 { font-size: 24px; }
+  .tile-desc { font-size: 15px; color: var(--text-2); }
+  .tile-stats { font-size: 13px; color: var(--text-3); }
+  .tile-actions { display: flex; gap: 10px; margin-top: auto; padding-top: 8px; }
+  .tile-actions .btn { flex: 1; min-height: 44px; padding: 0 12px; font-size: 15px; }
+  .tile-next { border: 1px dashed var(--line-strong); border-radius: 16px; min-height: 420px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; padding: 32px; text-align: center; }
+  .tile-next .eyebrow { color: var(--text-3); font-size: 13px; }
+  .tile-next p.big { font-family: var(--display); font-size: 22px; }
+
+  /* Build log */
+  .log { border-top: 1px solid var(--line); }
+  .log a { display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 22px 0; border-bottom: 1px solid var(--line); color: var(--text); text-decoration: none; }
+  .log a:hover .log-title { color: var(--accent); }
+  .log-day { flex: 0 0 120px; font-size: 14px; color: var(--text-3); }
+  .log-text { flex: 1 1 400px; display: flex; flex-direction: column; gap: 6px; }
+  .log-title { font-size: 18px; font-weight: 600; }
+  .log-sum { font-size: 15px; color: var(--text-2); }
+
+  /* Signup */
+  .signup { margin-bottom: 72px; padding: 40px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; }
+  .signup > div { flex: 1 1 380px; display: flex; flex-direction: column; gap: 8px; }
+  .signup h2 { font-size: 28px; }
+  .signup form { flex: 1 1 380px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .signup input { flex: 1 1 220px; min-height: 48px; padding: 0 16px; border-radius: var(--radius); border: 1px solid var(--line-strong); background: var(--bg); color: var(--text); font: inherit; font-size: 16px; }
+  .signup input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .form-note { flex-basis: 100%; font-size: 14px; color: var(--ok-text); min-height: 1.5em; }
+
+  /* Footer */
+  .site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 28px 0 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--text-3); }
+  .site-footer nav { display: flex; gap: 24px; }
+  .site-footer a { color: var(--text-3); }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 20px; }
+    .hero { padding: 56px 0 48px; }
+    .signup { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-header">
+    <a class="logo" href="/">[STUDIO NAME]</a>
+    <nav aria-label="Main">
+      <a href="#apps">Apps</a>
+      <a href="#log">Build log</a>
+      <a href="/about/">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <p class="eyebrow">Season 1 · The 12 Apps of Christmas</p>
+      <h1>One new app every day for twelve days.</h1>
+      <p class="lede">I'm a product manager building in public with a team of AI agents. Every app gets its own page showing what it does, how long it took, and what went wrong along the way.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#apps">Play today's app</a>
+        <a class="btn btn-ghost" href="#signup">Get each app by email</a>
+      </div>
+    </div>
+
+    <section id="apps" aria-labelledby="apps-title">
+      <div class="section-head">
+        <h2 id="apps-title">The apps so far</h2>
+        <p class="muted">1 of 12 released</p>
+      </div>
+      <div class="tiles">
+
+        <!-- One <article> per released app. Add new ones above the "next" card. -->
+        <article class="tile">
+          <div class="tile-media">[SCREENSHOT OR GIF]</div>
+          <div class="tile-body">
+            <div class="tile-meta">
+              <span class="tile-day">Day 1 · [DATE]</span>
+              <span class="badge">Shipped</span>
+            </div>
+            <h3>The Walk</h3>
+            <p class="tile-desc">An endless, slow platformer about walking, growing old, and what money can and can't buy.</p>
+            <p class="tile-stats">Built in [HOURS] hours · HTML5 canvas</p>
+            <div class="tile-actions">
+              <a class="btn btn-primary" href="/the-walk/">Play</a>
+              <a class="btn btn-ghost" href="/apps/the-walk/">How it was built</a>
+            </div>
+          </div>
+        </article>
+
+        <div class="tile-next">
+          <p class="eyebrow">Day 2</p>
+          <p class="big">Next app drops tomorrow</p>
+          <a href="#signup">Get it in your inbox</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="log" aria-labelledby="log-title">
+      <div class="section-head">
+        <h2 id="log-title">Build log</h2>
+      </div>
+      <div class="log">
+        <a href="/log/day-1/">
+          <span class="log-day">Day 1</span>
+          <span class="log-text">
+            <span class="log-title">Shipping The Walk</span>
+            <span class="log-sum">[What I built, what broke and what I cut to ship it on time.]</span>
+          </span>
+        </a>
+        <a href="/log/day-0/">
+          <span class="log-day">Day 0</span>
+          <span class="log-text">
+            <span class="log-title">Setting up the workshop</span>
+            <span class="log-sum">A new GitHub account, one domain, a template repo, and a skill that turns an idea into a live app.</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section id="signup" class="signup" aria-labelledby="signup-title">
+      <div>
+        <h2 id="signup-title">Get each new app by email</h2>
+        <p class="muted">One short email per release. Unsubscribe any time.</p>
+      </div>
+      <!-- Placeholder: point action at your newsletter provider's form endpoint. -->
+      <form id="signup-form" action="#" method="post">
+        <label class="sr-only" for="email">Email address</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+        <p class="form-note" id="form-note" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 [STUDIO NAME] · Made in Iceland</span>
+    <nav aria-label="Footer">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </footer>
+
+</div>
+<script>
+  // Mockup only: fakes a successful signup until a real newsletter form is wired up.
+  document.getElementById('signup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('form-note').textContent = "Thanks! (Mockup: nothing was sent.)";
+    this.reset();
+  });
+</script>
+</body>
+</html>
